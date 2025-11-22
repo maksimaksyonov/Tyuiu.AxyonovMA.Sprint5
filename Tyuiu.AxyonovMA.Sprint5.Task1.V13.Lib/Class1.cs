@@ -26,8 +26,10 @@ namespace Tyuiu.AxyonovMA.Sprint5.Task1.V13.Lib
                         ? 0
                         : ((2 * x - 3) / denom) + 5;
 
+                    double yRound = Math.Round(y, 2);
+
                     // округление до 2 знаков, русская культура (запятая)
-                    string yStr = Math.Round(y, 2).ToString("F2", new CultureInfo("ru-RU"));
+                    string yStr = yRound.ToString(new CultureInfo("ru-RU"));
 
                     writer.WriteLine(yStr);
                 }
