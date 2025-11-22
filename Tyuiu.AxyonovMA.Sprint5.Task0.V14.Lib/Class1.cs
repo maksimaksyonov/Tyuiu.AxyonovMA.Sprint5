@@ -1,6 +1,6 @@
 ﻿// Author: Максим Аксёнов
 // Project: Tyuiu.AxyonovMA.Sprint5.Task0.V14.Lib
-// Description: Вычисление y(x) и запись результата в файл (Вариант 14)
+// Description: Вычисление y(x) и запись результата в файл OutPutFileTask0.txt
 
 using System;
 using System.Globalization;
@@ -13,19 +13,26 @@ namespace Tyuiu.AxyonovMA.Sprint5.Task0.V14.Lib
     {
         public string SaveToFileTextData(int x)
         {
+            // вычисляем y(x) по формуле из задания
             double x3 = Math.Pow(x, 3);
             double denom = x3 - 1.0;
             double y = (denom == 0) ? 0.0 : (4.0 * x3) / denom;
 
-            // округление до 3 знаков
+            // округляем до 3 знаков
             double yRound = Math.Round(y, 3);
 
-            // путь к временной директории
-            string dir = Path.GetTempPath();
-            string filePath = Path.Combine(dir, "OutPutFileTask0.txt");
+            // твоя папка bin (как ты просил раньше)
+            string binDir = @"C:\Users\maxi\source\repos\Tyuiu.AxyonovMA.Sprint5\Tyuiu.AxyonovMA.Sprint5.Task0.V14\bin";
 
-            // запись числа формата "4.154"
-            File.WriteAllText(filePath, yRound.ToString("F3", CultureInfo.InvariantCulture));
+            if (!Directory.Exists(binDir))
+            {
+                Directory.CreateDirectory(binDir);
+            }
+
+            string filePath = Path.Combine(binDir, "OutPutFileTask0.txt");
+
+            // ВАЖНО: используем ru-RU, чтобы была запятая: 4,145
+            File.WriteAllText(filePath, yRound.ToString("F3", new CultureInfo("ru-RU")));
 
             return filePath;
         }
